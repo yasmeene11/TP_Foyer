@@ -6,6 +6,7 @@ import tn.esprit.tp_foyer.Entities.Bloc;
 import tn.esprit.tp_foyer.Entities.Reservation;
 import tn.esprit.tp_foyer.Repository.IReservationRepository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
 public class ReservationServiceImpl implements IReservationService {
     IReservationRepository reservationRepository;
     @Override
-    public Reservation findById(Long id) {
+    public Reservation findById(String id) {
         return reservationRepository.findById(id).orElse(null);
     }
 
@@ -27,9 +28,13 @@ return (List<Reservation>) reservationRepository.findAll();    }
 return reservationRepository.save(reservation);    }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         Optional<Reservation> reservationOptional = reservationRepository.findById(id);
         if (reservationOptional.isPresent()) {
             reservationRepository.deleteById(id);
         }    }
+
+    public List<Reservation> getReservationParAnneeUniversitaireEtNomUniversite(Date anneeUniversitaire, String nomUniversite) {
+        return reservationRepository.findByAnneeUniversitaireAndUniversite(anneeUniversitaire, nomUniversite);
+    }
 }

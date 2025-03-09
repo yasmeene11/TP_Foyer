@@ -1,12 +1,13 @@
 package tn.esprit.tp_foyer.Controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.tp_foyer.Entities.Foyer;
 import tn.esprit.tp_foyer.Services.IFoyerService;
 
 import java.util.List;
-
+@Tag(name = "Gestion foyer")
 @RestController
 @RequestMapping("/foyer")
 @AllArgsConstructor

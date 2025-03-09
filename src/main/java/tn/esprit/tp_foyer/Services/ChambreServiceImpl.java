@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tp_foyer.Entities.Bloc;
 import tn.esprit.tp_foyer.Entities.Chambre;
+import tn.esprit.tp_foyer.Entities.TypeChambre;
 import tn.esprit.tp_foyer.Repository.IChambreRepository;
 
 import java.util.List;
@@ -35,4 +36,7 @@ public class ChambreServiceImpl implements IChambreService {
         if (chambreOptional.isPresent()) {
             chambreRepository.deleteById(id);
         }    }
+    public List<Chambre> getChambresNonReserveParNomUniversiteEtTypeChambre(String nomUniversite, TypeChambre type) {
+        return chambreRepository.findNonReservedByUniversiteAndType(nomUniversite, type);
+    }
     }

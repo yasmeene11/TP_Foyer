@@ -6,9 +6,9 @@ import tn.esprit.tp_foyer.Entities.Reservation;
 import java.util.List;
 
 public interface IReservationService {
-    public Reservation findById(Long id);
+    public Reservation findById(String id);
 
     public List<Reservation> findAll( );
     public Reservation save(Reservation reservation);
-    public void delete(Long id );
+    public void delete(String id );
 }
