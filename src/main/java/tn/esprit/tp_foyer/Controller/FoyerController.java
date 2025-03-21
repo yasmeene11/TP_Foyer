@@ -2,6 +2,7 @@ package tn.esprit.tp_foyer.Controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.tp_foyer.Entities.Foyer;
 import tn.esprit.tp_foyer.Services.IFoyerService;
@@ -29,6 +30,8 @@ IFoyerService IFoyerService;
     public Foyer findByNomFoyerAndCapaciteFoyer(@PathVariable String nomFoyer, @PathVariable Long capaciteFoyer) {
         return IFoyerService.getByNomFoyerAndCapaciteFoyer(nomFoyer, capaciteFoyer);
     }
-
-
+    @PostMapping("/ajouter/{idUniversite}")
+    public ResponseEntity<Foyer> ajouterFoyer(@RequestBody Foyer foyer, @PathVariable long idUniversite) {
+        return ResponseEntity.ok(IFoyerService.ajouterFoyerEtAffecterAUniversite(foyer, idUniversite));
+    }
 }

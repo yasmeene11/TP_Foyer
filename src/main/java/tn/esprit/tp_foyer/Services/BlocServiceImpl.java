@@ -1,11 +1,15 @@
 package tn.esprit.tp_foyer.Services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.tp_foyer.Entities.Bloc;
+import tn.esprit.tp_foyer.Entities.Chambre;
 import tn.esprit.tp_foyer.Entities.Foyer;
 import tn.esprit.tp_foyer.Repository.IBlocRepository;
+import tn.esprit.tp_foyer.Repository.IChambreRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,4 +36,21 @@ public class BlocServiceImpl implements IBlocService {
         if (blocOptional.isPresent()) {
             blocRepository.deleteById(id);
         }    }
-}
+    @Autowired
+IChambreRepository chambreRepository;
+    @Override
+    public List<Chambre> affecterChambresABloc(List<Long> numChambre, long idBloc) {
+        Bloc bloc = blocRepository.findById(idBloc)
+                .orElseThrow(() -> new IllegalArgumentException("Bloc not found with id: " + idBloc));
+        List<Chambre> updatedChambres = new ArrayList<>();
+        for (Long num : numChambre) {
+            Chambre chambre = (Chambre) chambreRepository.findByNumeroChambreIn(numChambre);
+            chambre.setBloc(bloc);
+            chambreRepository.save(chambre);
+            updatedChambres.add(chambre);
+        }
+        return updatedChambres;
+    }
+
+
+    }

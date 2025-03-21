@@ -11,4 +11,5 @@ public interface IFoyerService {
     public Foyer save(Foyer foyer);
     public void delete(Long id );
     public Foyer getByNomFoyerAndCapaciteFoyer(String nomFoyer, Long capaciteFoyer);
+    public Foyer ajouterFoyerEtAffecterAUniversite(Foyer foyer, long idUniversite);
 }

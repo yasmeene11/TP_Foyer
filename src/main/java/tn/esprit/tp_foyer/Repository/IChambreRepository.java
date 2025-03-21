@@ -7,6 +7,7 @@ import tn.esprit.tp_foyer.Entities.Chambre;
 import tn.esprit.tp_foyer.Entities.TypeChambre;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IChambreRepository extends JpaRepository<Chambre,Long> {
     @Query("SELECT c FROM Chambre c WHERE c.typeC = :type AND c.bloc.foyer.universite.nomUniversite = :nomUniversite " +
@@ -14,5 +15,6 @@ public interface IChambreRepository extends JpaRepository<Chambre,Long> {
     List<Chambre> findNonReservedByUniversiteAndType(@Param("nomUniversite") String nomUniversite, @Param("type") TypeChambre type);
     @Query("SELECT c FROM Chambre c WHERE c.bloc.idBloc = :idBloc AND c.typeC = :typeC")
     List<Chambre> findChambresByBlocAndTypeJPQL(@Param("idBloc") long idBloc, @Param("typeC") TypeChambre typeC);
-    List<Chambre> findByBlocIdAndType(long idBloc, TypeChambre typeC);
+    List<Chambre> findByTypeCAndBlocIdBloc( TypeChambre typeC, long idBloc);
+    List<Chambre> findByNumeroChambreIn(List<Long> numeroChambre);
 }
